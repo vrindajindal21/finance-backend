@@ -107,21 +107,26 @@ async function fetchRecords() {
         });
         const data = await res.json();
 
-        if (res.ok) {
-            recordsList.innerHTML = data.map(rec => `
+        if (res.ok && data.records) {
+            recordsList.innerHTML = data.records.length === 0
+                ? '<p class="placeholder">No records found.</p>'
+                : data.records.map(rec => `
                 <div class="record-item fade-in">
                     <div>
                         <strong>${rec.category}</strong>
                         <span class="category-pill">${rec.type}</span>
-                        <div class="subtitle" style="font-size:0.8rem; margin:0">${new Date(rec.date).toLocaleDateString()}</div>
+                        <div style="font-size:0.8rem; color:#94a3b8; margin-top:2px">${new Date(rec.date).toLocaleDateString()}</div>
                     </div>
-                    <div class="${rec.type === 'INCOME' ? 'text-success' : 'text-danger'} font-bold">
+                    <div class="${rec.type === 'INCOME' ? 'text-success' : 'text-danger'}" style="font-weight:700">
                         ${rec.type === 'INCOME' ? '+' : '-'}$${rec.amount.toLocaleString()}
                     </div>
                 </div>
             `).join('');
+        } else {
+            recordsList.innerHTML = '<p class="placeholder">Could not load records.</p>';
         }
     } catch (err) {
+        recordsList.innerHTML = '<p class="placeholder">Error loading records.</p>';
         console.error('Records fetch error', err);
     }
 }
