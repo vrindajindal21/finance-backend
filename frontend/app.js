@@ -127,8 +127,8 @@ async function fetchRecords() {
 }
 
 // Modal handling
-addRecordBtn.addEventListener('click', () => recordModal.classList.remove('hidden'));
-closeModal.addEventListener('click', () => recordModal.classList.add('hidden'));
+addRecordBtn.addEventListener('click', () => recordModal.style.display = 'flex');
+closeModal.addEventListener('click', () => recordModal.style.display = 'none');
 
 recordForm.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -150,7 +150,7 @@ recordForm.addEventListener('submit', async (e) => {
         });
 
         if (res.ok) {
-            recordModal.classList.add('hidden');
+            recordModal.style.display = 'none';
             recordForm.reset();
             showDashboard(); // Refresh
         } else {
