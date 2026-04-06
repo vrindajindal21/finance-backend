@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zorvyn Finance Portal</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="glass-bg"></div>
+    <div class="app-container">
+        <!-- Auth Section -->
+        <section id="auth-section" class="card fade-in">
+            <h1 class="portal-title">Finance Portal Login</h1>
+            <p class="subtitle">Access your dashboard securely.</p>
+            <form id="login-form">
+                <input type="email" id="email" placeholder="Email" required value="admin@finance.com">
+                <input type="password" id="password" placeholder="Password" required value="admin123">
+                <button type="submit" class="btn-primary">Login to Dashboard</button>
+            </form>
+            <p class="helper">Demo users: admin@finance.com, analyst@finance.com, viewer@finance.com</p>
+        </section>
+
+        <!-- Dashboard Section -->
+        <section id="dashboard-section" class="hidden">
+            <header class="dashboard-header">
+                <div class="user-info">
+                    <h1>Welcome, <span id="user-name">User</span></h1>
+                    <span id="user-role" class="badge">VIEWER</span>
+                </div>
+                <button id="logout-btn" class="btn-secondary">Logout</button>
+            </header>
+
+            <div class="stats-grid">
+                <div class="stat-card glass grow">
+                    <h3>Total Income</h3>
+                    <p id="total-income" class="stat-value text-success">$0.00</p>
+                </div>
+                <div class="stat-card glass grow">
+                    <h3>Total Expenses</h3>
+                    <p id="total-expenses" class="stat-value text-danger">$0.00</p>
+                </div>
+                <div class="stat-card glass grow">
+                    <h3>Net Balance</h3>
+                    <p id="net-balance" class="stat-value">$0.00</p>
+                </div>
+            </div>
+
+            <div class="dashboard-main">
+                <div class="records-container card glass">
+                    <div class="list-header">
+                        <h2>Recent Records</h2>
+                        <button id="add-record-btn" class="btn-sm btn-primary hidden">Add Entry</button>
+                    </div>
+                    <div id="records-list" class="scroll-area">
+                        <p class="placeholder">Select 'Analyst' or 'Admin' to see records.</p>
+                    </div>
+                </div>
+                
+                <div class="categories-container card glass">
+                    <h2>Expenses by Category</h2>
+                    <div id="categories-list" class="category-grid">
+                        <!-- Categories dynamically populated -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Modals -->
+    <div id="record-modal" class="modal hidden">
+        <div class="modal-content glass">
+            <h2>Add Financial Entry</h2>
+            <form id="record-form">
+                <input type="number" id="rec-amount" placeholder="Amount" required>
+                <select id="rec-type">
+                    <option value="INCOME">Income</option>
+                    <option value="EXPENSE">Expense</option>
+                </select>
+                <input type="text" id="rec-category" placeholder="Category (e.g. Rent, Salary)" required>
+                <textarea id="rec-notes" placeholder="Notes"></textarea>
+                <div class="modal-footer">
+                    <button type="button" id="close-modal" class="btn-secondary">Cancel</button>
+                    <button type="submit" class="btn-primary">Save Record</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
